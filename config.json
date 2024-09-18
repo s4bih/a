@@ -1,0 +1,10 @@
+{
+  "parameters": {
+      "secret_key": "your_secret_key",
+      "local_server": true,
+      "local_url": "mysql://root:@127.0.0.1/data_siswa",
+      "prod_url": "",
+      "app_name": "data_siswa"
+
+  }
+}

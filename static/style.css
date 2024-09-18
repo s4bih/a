@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.text {
+    margin-right: 10px;
+}
+
+.button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
