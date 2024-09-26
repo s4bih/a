@@ -71,18 +71,7 @@ def add():
         return redirect(url_for('siswa'))
     return render_template('add.html',params=params)
 
-@app.route("/update/<string:post_id>", methods=['GET', 'POST'])
-def update(post_id):
-    post = Siswa.query.filter_by(id=post_id).first()
-    if request.method == 'POST':
-        post.nama = request.form.get('nama')
-        post.tempattanggallahir = request.form.get('tempattanggallahir')
-        post.alamat = request.form.get('alamat')
-        post.jeniskelamin = request.form.get('jeniskelamin')
-        post.namaibu = request.form.get('namaibu')
-        post.namabapak = request.form.get('namabapak')
-        db.session.commit()
-        return redirect(url_for('Siswa'))
+
 
 @app.route("/delete/<string:post_id>", methods=['GET', 'POST'])
 def delete(post_id):
@@ -93,6 +82,39 @@ def delete(post_id):
     db.session.commit()
     return redirect(url_for('siswa'))
 
+@app.route("/update/<string:post_id>", methods=['GET', 'POST'])
+def update(post_id):
+    post = Siswa.query.filter_by(id=post_id).first()
+    if post is None:
+        return "Post tidak ditemukan", 404
+
+    if request.method == 'POST':
+        try:
+            nnama = request.form.get('nama')
+            ntempattanggallahir = request.form.get('tempattanggallahir')
+            nalamat = request.form.get('alamat')
+            njeniskelamin = request.form.get('jeniskelamin')
+            nnamaibu = request.form.get('namaibu')
+            nnamabapak = request.form.get('namabapak')
+
+            # Validasi form
+            if not all([nnama, ntempattanggallahir, nalamat, njeniskelamin, nnamaibu, nnamabapak]):
+                return "Form tidak lengkap", 400
+
+            post.nama = nnama
+            post.tempattanggallahir = ntempattanggallahir
+            post.alamat = nalamat
+            post.jeniskelamin = njeniskelamin
+            post.namaibu = nnamaibu
+            post.namabapak = nnamabapak
+
+            db.session.commit()
+            return redirect(url_for('siswa'))
+        except Exception as e:
+            db.session.rollback()
+            return "Error: {}".format(e), 500
+
+    return render_template('update.html', params=params, post=post)
 
 
 
