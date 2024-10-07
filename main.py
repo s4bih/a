@@ -24,7 +24,12 @@ app.config['SECRET_KEY'] = params['secret_key']
 app.config['SECRET_KEY']
 db=SQLAlchemy(app)
 
-
+class Sekolah(db.Model):
+    sekolah=db.Column(db.String(100),primary_key=True)
+    jumlah_siswa=db.Column(db.Integer,nullable=False)
+    kabupaten=db.Column(db.String(150),nullable=False)
+    kecamatan=db.Column(db.String(150),nullable=False)
+    alamat_sekolah=db.Column(db.String(200),nullable=False)
 class Siswa(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nama = db.Column(db.String(50), nullable=False)
@@ -43,9 +48,9 @@ class Siswa(db.Model):
 
 @app.route("/",methods=['GET'])
 
-def siswa():
+def sekolah():
 
-    s = Siswa.query.all()
+    s=Sekolah.query.all()
     return render_template('crud.html',s=s)
 
 
