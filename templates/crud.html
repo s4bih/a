@@ -48,22 +48,37 @@
         <td><a href="/update/{{ data.id }}">
             <button type="button" class="btn btn-primary">Update</button>
         </a></td>
+        {% endfor %}
         <!-- Example single danger button -->
         <div class="btn-group">
             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
                     aria-expanded="false">
-                Action
+                kabupaten
             </button>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">{{ data.sekolah }}</a></li>
-
+                {% for s in s %}
+                <li><a class="dropdown-item" href="#">{{ s.kabupaten}}</a></li>
+                {% endfor %}
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+            </ul>
+        </div>
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                kecamatan
+            </button>
+            <ul class="dropdown-menu">
+                {% for S in s %}
+                <li><a class="dropdown-item" href="#">{{ S.kecamatan}}</a></li>
+                {% endfor %}
                 <li>
                     <hr class="dropdown-divider">
                 </li>
             </ul>
         </div>
     </tr>
-    {% endfor %}
 
 
     </tbody>

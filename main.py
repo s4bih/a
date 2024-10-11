@@ -50,8 +50,9 @@ class Siswa(db.Model):
 
 def sekolah():
 
+    Sis=Siswa.query.all()
     s=Sekolah.query.all()
-    return render_template('crud.html',s=s)
+    return render_template('crud.html',s=s,Sis=Sis)
 
 
 
